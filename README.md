@@ -15,7 +15,7 @@ node again. To avoid processing a node more than once, we divide the vertices in
 2. Not visited. 
 A Boolean visited array is used to mark the visited vertices. For simplicity, it is assumed that all 
 vertices are reachable from the starting vertex. BFS uses a queue data structure for traversal. 
-How does BFS work? 
+# How does BFS work? 
 Starting from the root, all the nodes at a particular level are visited first, and then the next level 
 nodes are traversed until all the nodes are visited. 
 To do this, a queue is used. All the adjacent unvisited nodes of the current level are pushed into the 
@@ -116,6 +116,7 @@ visited = defaultdict(bool)
 traversedpath = bfs(graph,start,visited,path) 
 print(traversedpath)
 ```
+
 # Sample Input : 
 ```
 5 6 
@@ -126,7 +127,11 @@ print(traversedpath)
 2 4 
 3 4
 ```
+
 # Sample Output: 
 ```
 ['0', '1', '2', '3', '4']
 ```
+
+# Result:
+Thus,a Graph was constructed and implementation of Breadth First Search for the same graph was done successfully.
