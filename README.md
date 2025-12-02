@@ -73,48 +73,56 @@ Now, Queue becomes empty, So, terminate these process of iteration.
 6. Iterate steps 4 and 5 until all nodes get visited, and there are no more unvisited nodes. 
 # Program: 
 ```
-from collections import deque 
-from collections import defaultdict 
-''' 
-V E 
-FOR EVERY EDGE 
-U V 
-7 9 
-A B 
-A C  
-A F 
-C E 
-C F 
-C D 
-D E  
-D G 
-G F 
-''' 
-def bfs(graph,start,visited,path): 
-queue = deque() 
-path.append(start) 
-queue.append(start) 
-visited[start] = True 
-while len(queue) != 0: 
-tmpnode = queue.popleft() 
-for neighbour in graph[tmpnode]: 
-if visited[neighbour] == False: 
-path.append(neighbour) 
-queue.append(neighbour) 
-visited[neighbour] = True 
-return path 
-graph = defaultdict(list) 
-v,e = map(int,input().split()) 
-for i in range(e): 
-u,v = map(str,input().split()) 
-graph[u].append(v) 
-graph[v].append(u) 
-start = '0' 
-#start=’A’ 
-path = [] 
-visited = defaultdict(bool) 
-traversedpath = bfs(graph,start,visited,path) 
-print(traversedpath)
+from collections import deque
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    result = []
+
+    while queue:
+        node = queue.popleft()
+        
+        if node not in visited:
+            visited.add(node)
+            result.append(node)
+
+            # Enqueue unvisited neighbors
+            for neighbor in graph[node]:
+                if neighbor not in visited:
+                    queue.append(neighbor)
+
+    return result
+
+
+# -------------------------
+# MAIN PROGRAM
+# -------------------------
+
+# Number of nodes and edges
+n, e = map(int, input().split())
+
+graph = {}
+
+# Read edges
+for _ in range(e):
+    u, v = input().split()
+
+    if u not in graph:
+        graph[u] = []
+    if v not in graph:
+        graph[v] = []
+
+    graph[u].append(v)
+    # If graph is undirected, add: graph[v].append(u)
+
+# Start BFS from the first node in input
+start_node = list(graph.keys())[0]
+
+# Perform BFS
+output = bfs(graph, start_node)
+print(output)
+
 ```
 
 # Sample Input : 
@@ -132,6 +140,9 @@ print(traversedpath)
 ```
 ['0', '1', '2', '3', '4']
 ```
+
+# Output:
+<img width="798" height="729" alt="image" src="https://github.com/user-attachments/assets/ec08bfac-f981-4672-9b69-971e09caddce" />
 
 # Result:
 Thus,a Graph was constructed and implementation of Breadth First Search for the same graph was done successfully.
